@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Home</title>
+	
+	<object th:include="fragments/fragment :: css" th:remove="tag"></object>
+	<object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+	<nav th:replace="fragments/fragment :: navbar"></nav>
+	
+	<div class="col-md-6">
+		<h2>Sistem Informasi Kepegawaian</h2>
+		<p>Selamat datang di Sistem informasi Kepegawaian</p>
+	</div>
+	<hr>
+	<div class="col-md-6">
+		<h3>Lihat Data Pegawai berdasarkan NIP</h3>
+		<form th:action="@{/pegawai}" method="GET">
+			<label for="pilotLicenseNumber">Masukkan Nomor Induk Pegawai</label>
+			<input type="text" name="nip" class="form-control"/>
+			<br>
+			<button type="submit" class="btn btn-primary">Lihat</button>
+		</form>
+	</div>
+	<hr>
+	<div class="col-md-6">
+		<h3>Lihat Detail Jabatan</h3>
+		<form th:action="@{/jabatan/view}" method="GET">
+			<label for="pilotLicenseNumber">Pilih</label>
+		 	<select name="idJabatan" class="form-control"/>
+				<option th:each="jabatan : ${listSemuaJabatan}"
+				th:value="${jabatan.id}"
+				th:text="${jabatan.nama}"></option>
+			</select>
+			<br>
+			<button type="submit" class="btn btn-primary">Lihat</button>
+		</form>
+	</div>
+</body>
+
+</html>

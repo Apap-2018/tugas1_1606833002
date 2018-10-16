@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Add Pegawai</title>
+	
+	<object th:include="fragments/fragment :: css" th:remove="tag"></object>
+	<object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+	<nav th:replace="fragments/fragment :: navbar"></nav>
+	<div class="container-fluid">
+		<h2 th:text="'Tambah Pegawai'"></h2>
+		<form th:action="@{/pegawai/tambah}" th:object="${pegawai}" method="POST">
+			<table>
+				<tbody>
+				 	<tr>
+				 		<td th:text="'Nama'"></td>
+				 		<td>
+			 				<input type="text" th:field="*{nama}" class="form-control"/>
+				 		</td>
+				 	</tr>
+				 	<tr>
+				 		<td th:text="'Tempat Lahir'"></td>
+				 		<td>
+			 				<input type="text" th:field="*{tempatLahir}" class="form-control"/>
+				 		</td>
+				 	</tr>
+				 	<tr>
+				 		<td th:text="'Tanggal Lahir'"></td>
+				 		<td>
+			 				<input type="date" th:field="*{tanggalLahir}" class="form-control"/>
+				 		</td>
+				 	</tr>
+				 	<tr>
+				 		<td th:text="'Tahun Masuk'"></td>
+				 		<td>
+			 				<input type="number" th:field="*{tahunMasuk}" class="form-control"/>
+				 		</td>
+				 	</tr>
+				 	<tr>
+				 		<td th:text="'Provinsi'"></td>
+				 		<td>
+			 				<select class="form-control"/>
+								<option th:each="provinsi : ${listProvinsi}"
+								th:value="${provinsi}"
+								th:text="${provinsi.nama}"></option>
+			 				</select>
+				 		</td>
+				 	</tr>
+				 	
+				 	<tr>
+				 		<td th:text="'Nama Instansi'"></td>
+				 		<td>
+			 				<select name="instansi" class="form-control"/>
+								<option th:each="instansi: ${listInstansi}"
+								th:value="${instansi.id}"
+								th:text="${instansi.nama}"></option>
+			 				</select>
+				 		</td>
+				 	</tr>
+				 	
+				 	<tr th:each="calonJabatan, iterationStatus : *{jabatanList}">
+				 		<td th:text="'Jabatan'"></td>
+				 		<td>
+			 				<select name="jabatanList[0]" class="form-control"/>
+								<option th:each="jabatan : ${listSemuaJabatan}"
+								th:value="${jabatan}"
+								th:text="${jabatan.nama}"></option>
+			 				</select>
+				 		</td>
+				 	</tr>
+				 	<tr>
+				 		<td></td>
+				 		<td>
+				 			<button type="submit" name="addRowJabatan" >Tambah Jabatan Lainnya</button>
+				 		</td>
+				 	</tr>
+				</tbody>
+			</table>
+			<button type="submit" name="submit">Simpan</button>
+		</form>
+	</div>
+</body>
+
+</html>
