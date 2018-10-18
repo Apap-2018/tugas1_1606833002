@@ -1,5 +1,6 @@
 package com.apap.tugas1.service;
 
+import com.apap.tugas1.model.InstansiModel;
 import com.apap.tugas1.model.PegawaiModel;
 
 /**
@@ -16,4 +17,8 @@ public interface PegawaiService {
 	int countGaji(PegawaiModel pegawai);
 	
 	void createNIP(PegawaiModel pegawai);
+	
+	PegawaiModel getPegawaiTuaInstansi (InstansiModel instansi);
+	
+	PegawaiModel getPegawaiMudaInstansi (InstansiModel instansi);
 }

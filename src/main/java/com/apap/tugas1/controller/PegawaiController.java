@@ -1,7 +1,6 @@
 package com.apap.tugas1.controller;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.apap.tugas1.model.InstansiModel;
 import com.apap.tugas1.model.JabatanModel;
 import com.apap.tugas1.model.PegawaiModel;
 import com.apap.tugas1.service.InstansiService;
@@ -36,6 +36,7 @@ public class PegawaiController {
 	@RequestMapping("/")
 	private String home(Model model) {
 		model.addAttribute("listSemuaJabatan", jabatanService.getAll());
+		model.addAttribute("listInstansi", instansiService.getAll());
 		return "home";
 	}
 	
@@ -77,7 +78,7 @@ public class PegawaiController {
 		model.addAttribute("pegawai", pegawai);
 		model.addAttribute("listProvinsi", provinsiService.getAll());
 		model.addAttribute("listSemuaJabatan", jabatanService.getAll());
-		return "add-Pegawai";
+		return "add-pegawai";
 	}
 	
 	@RequestMapping(value = "/pegawai/tambah", method = RequestMethod.POST, params= {"submit"})
@@ -94,10 +95,23 @@ public class PegawaiController {
 			@RequestParam(value="idJabatan", required=false) String id_jabatan,
 			Model model) {
 		
-		return "cari-Pegawai";
+		
+		model.addAttribute("listProvinsi", provinsiService.getAll());
+		model.addAttribute("listJabatan", jabatanService.getAll());
+		model.addAttribute("listInstansi", instansiService.getAll());
+		return "cari-pegawai";
 	}
 	
-	
+	@RequestMapping(value = "/pegawai/termuda-tertua")
+	private String termudaTertua(@RequestParam(value = "idInstansi") Long id_instansi, Model model){
+		InstansiModel instansi = instansiService.getInstansiDetailById(id_instansi);
+		PegawaiModel tua = pegawaiService.getPegawaiTuaInstansi(instansi);
+		PegawaiModel muda = pegawaiService.getPegawaiMudaInstansi(instansi);
+		
+		model.addAttribute("tua", tua);
+		model.addAttribute("muda", muda);
+		return "tua-muda-pegawai";
+	}
 	
 	
 }

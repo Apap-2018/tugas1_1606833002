@@ -20,4 +20,8 @@ public interface PegawaiDB extends JpaRepository<PegawaiModel, Long>{
 	PegawaiModel findByNip(String nip);
 	
 	ArrayList<PegawaiModel> findByInstansi (InstansiModel instansi);
+	
+	PegawaiModel findFirstByInstansiOrderByTanggalLahirAsc(InstansiModel instansi);
+	
+	PegawaiModel findFirstByInstansiOrderByTanggalLahirDesc(InstansiModel instansi);
 }

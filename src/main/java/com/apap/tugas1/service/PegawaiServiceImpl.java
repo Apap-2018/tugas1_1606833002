@@ -75,7 +75,17 @@ public class PegawaiServiceImpl implements PegawaiService{
 	public void createNIP(PegawaiModel pegawai) {
 		pegawai.setNip(codeNIP(pegawai));
 	}
-	
-	
 
+	@Override
+	public PegawaiModel getPegawaiTuaInstansi(InstansiModel instansi) {
+		return pegawaiDB.findFirstByInstansiOrderByTanggalLahirAsc(instansi);
+	}
+
+	@Override
+	public PegawaiModel getPegawaiMudaInstansi(InstansiModel instansi) {
+		return pegawaiDB.findFirstByInstansiOrderByTanggalLahirDesc(instansi);
+	}
+	
+	
+	
 }

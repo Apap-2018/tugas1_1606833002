@@ -27,4 +27,9 @@ public class InstansiServiceImpl implements InstansiService{
 		return instansiDB.findByProvinsi(provinsi);
 	}
 
+	@Override
+	public InstansiModel getInstansiDetailById(Long id) {
+		return instansiDB.findById(id).get();
+	}
+
 }

@@ -29,11 +29,25 @@
 	<div class="col-md-6">
 		<h3>Lihat Detail Jabatan</h3>
 		<form th:action="@{/jabatan/view}" method="GET">
-			<label for="pilotLicenseNumber">Pilih</label>
+			<label for="pilotLicenseNumber">Pilih Jabatan</label>
 		 	<select name="idJabatan" class="form-control"/>
 				<option th:each="jabatan : ${listSemuaJabatan}"
 				th:value="${jabatan.id}"
 				th:text="${jabatan.nama}"></option>
+			</select>
+			<br>
+			<button type="submit" class="btn btn-primary">Lihat</button>
+		</form>
+	</div>
+	<hr>
+	<div class="col-md-6">
+		<h3>Lihat Pegawai Termuda dan Tertua</h3>
+		<form th:action="@{/pegawai/termuda-tertua}" method="GET">
+			<label for="pilotLicenseNumber">Pilih Instansi</label>
+		 	<select name="idInstansi" class="form-control"/>
+				<option th:each="instansi : ${listInstansi}"
+				th:value="${instansi.id}"
+				th:text="${instansi.nama}"></option>
 			</select>
 			<br>
 			<button type="submit" class="btn btn-primary">Lihat</button>
