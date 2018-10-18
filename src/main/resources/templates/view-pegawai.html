@@ -11,48 +11,51 @@
 <body>
 	<nav th:replace="fragments/fragment :: navbar"></nav>
 	<div class="container-fluid">
-		<h2 th:text="'Lihat Data Pegawai - ' + ${nip}"></h2>
-		<table>
-			<tbody>
-				<tr>
-					<td th:text="'NIP'"></td>
-					<td th:text="${nip}"></td>
-				</tr>
-				<tr>
-					<td th:text="'Nama'"></td>
-					<td th:text="${pegawai.nama}"></td>
-				</tr>
-				<tr>
-					<td th:text="'Tempat Lahir'"></td>
-					<td th:text="${pegawai.tempatLahir}"></td>
-				</tr>
-				<tr>
-					<td th:text="'Tanggal Lahir'"></td>
-					<td th:text="${pegawai.tanggalLahir}"></td>
-				</tr>
-				<tr>
-					<td th:text="'Tahun Masuk'"></td>
-					<td th:text="${pegawai.tahunMasuk}"></td>
-				</tr>
-				<tr>
-					<td th:text="'Nama Instansi'"></td>
-					<td th:text="${pegawai.instansi.nama}"></td>
-				</tr>
-				<tr>
-					<td th:text="'Jabatan'"></td>
-					<td th:each="jabatan : ${listJabatan}">
-						<ul>
-							<li th:text="${jabatan.nama}"></li>
-						</ul>
-					</td>
-				</tr>
-				<tr>
-					<td th:text="'Gaji'"></td>
-					<td th:text="'Rp' + ${gaji}"></td>
-				</tr>
-			</tbody>
-		
-		</table>
+		<div class="col-md-8">
+			<h2 th:text="'Lihat Data Pegawai - ' + ${nip}"></h2>
+			<br>
+			<table class="table">
+				<tbody>
+					<tr>
+						<td th:text="'NIP'"></td>
+						<td th:text="${nip}"></td>
+					</tr>
+					<tr>
+						<td th:text="'Nama'"></td>
+						<td th:text="${pegawai.nama}"></td>
+					</tr>
+					<tr>
+						<td th:text="'Tempat Lahir'"></td>
+						<td th:text="${pegawai.tempatLahir}"></td>
+					</tr>
+					<tr>
+						<td th:text="'Tanggal Lahir'"></td>
+						<td th:text="${pegawai.tanggalLahir}"></td>
+					</tr>
+					<tr>
+						<td th:text="'Tahun Masuk'"></td>
+						<td th:text="${pegawai.tahunMasuk}"></td>
+					</tr>
+					<tr>
+						<td th:text="'Nama Instansi'"></td>
+						<td th:text="${pegawai.instansi.nama}"></td>
+					</tr>
+					<tr>
+						<td th:text="'Jabatan'"></td>
+						<td th:each="jabatan : ${listJabatan}">
+							<ul>
+								<li th:text="${jabatan.nama}"></li>
+							</ul>
+						</td>
+					</tr>
+					<tr>
+						<td th:text="'Gaji'"></td>
+						<td th:text="'Rp' + ${gaji}"></td>
+					</tr>
+				</tbody>
+			
+			</table>
+		</div>
 	</div>
 </body>
 

@@ -11,83 +11,88 @@
 <body>
 	<nav th:replace="fragments/fragment :: navbar"></nav>
 	<div class="container-fluid">
-		<h2 th:text="'Data Pegawai Termuda '"></h2>
-		<table>
-			<tbody>
-				<tr>
-					<td th:text="'NIP'"></td>
-					<td th:text="${muda.nip}"></td>
-				</tr>
-				<tr>
-					<td th:text="'Nama'"></td>
-					<td th:text="${muda.nama}"></td>
-				</tr>
-				<tr>
-					<td th:text="'Tempat Lahir'"></td>
-					<td th:text="${muda.tempatLahir}"></td>
-				</tr>
-				<tr>
-					<td th:text="'Tanggal Lahir'"></td>
-					<td th:text="${muda.tanggalLahir}"></td>
-				</tr>
-				<tr>
-					<td th:text="'Tahun Masuk'"></td>
-					<td th:text="${muda.tahunMasuk}"></td>
-				</tr>
-				<tr>
-					<td th:text="'Nama Instansi'"></td>
-					<td th:text="${muda.instansi.nama}"></td>
-				</tr>
-				<tr th:each="jabatan, iterationStatus : ${muda.jabatanList}">
-					<td th:text=" ${iterationStatus.first} ? 'Jabatan'"></td>
-					<td>
-						<ul>
-							<li th:text="${jabatan.nama}"></li>
-						</ul>
-					</td>
-				</tr>
-			</tbody>
-		
-		</table>
+	
+		<div class="col-md-6">
+			<h2 th:text="'Data Pegawai Termuda '"></h2>
+			<table class="table">
+				<tbody>
+					<tr>
+						<td th:text="'NIP'"></td>
+						<td th:text="${muda.nip}"></td>
+					</tr>
+					<tr>
+						<td th:text="'Nama'"></td>
+						<td th:text="${muda.nama}"></td>
+					</tr>
+					<tr>
+						<td th:text="'Tempat Lahir'"></td>
+						<td th:text="${muda.tempatLahir}"></td>
+					</tr>
+					<tr>
+						<td th:text="'Tanggal Lahir'"></td>
+						<td th:text="${muda.tanggalLahir}"></td>
+					</tr>
+					<tr>
+						<td th:text="'Tahun Masuk'"></td>
+						<td th:text="${muda.tahunMasuk}"></td>
+					</tr>
+					<tr>
+						<td th:text="'Nama Instansi'"></td>
+						<td th:text="${muda.instansi.nama}"></td>
+					</tr>
+					<tr th:each="jabatan, iterationStatus : ${muda.jabatanList}">
+						<td th:text=" ${iterationStatus.first} ? 'Jabatan'"></td>
+						<td>
+							<ul>
+								<li th:text="${jabatan.nama}"></li>
+							</ul>
+						</td>
+					</tr>
+				</tbody>
+			
+			</table>
+		</div>
 		<br>
-				<h2 th:text="'Data Pegawai Tertua '"></h2>
-		<table>
-			<tbody>
-				<tr>
-					<td th:text="'NIP'"></td>
-					<td th:text="${tua.nip}"></td>
-				</tr>
-				<tr>
-					<td th:text="'Nama'"></td>
-					<td th:text="${tua.nama}"></td>
-				</tr>
-				<tr>
-					<td th:text="'Tempat Lahir'"></td>
-					<td th:text="${tua.tempatLahir}"></td>
-				</tr>
-				<tr>
-					<td th:text="'Tanggal Lahir'"></td>
-					<td th:text="${tua.tanggalLahir}"></td>
-				</tr>
-				<tr>
-					<td th:text="'Tahun Masuk'"></td>
-					<td th:text="${tua.tahunMasuk}"></td>
-				</tr>
-				<tr>
-					<td th:text="'Nama Instansi'"></td>
-					<td th:text="${tua.instansi.nama}"></td>
-				</tr>
-				<tr th:each="jabatan, iterationStatus : ${tua.jabatanList}">
-					<td th:text=" ${iterationStatus.first} ? 'Jabatan'"></td>
-					<td>
-						<ul>
-							<li th:text="${jabatan.nama}"></li>
-						</ul>
-					</td>
-				</tr>
-			</tbody>
-		
-		</table>
+		<div class="col-md-6">
+		<h2 th:text="'Data Pegawai Tertua '"></h2>
+			<table class="table">
+				<tbody>
+					<tr>
+						<td th:text="'NIP'"></td>
+						<td th:text="${tua.nip}"></td>
+					</tr>
+					<tr>
+						<td th:text="'Nama'"></td>
+						<td th:text="${tua.nama}"></td>
+					</tr>
+					<tr>
+						<td th:text="'Tempat Lahir'"></td>
+						<td th:text="${tua.tempatLahir}"></td>
+					</tr>
+					<tr>
+						<td th:text="'Tanggal Lahir'"></td>
+						<td th:text="${tua.tanggalLahir}"></td>
+					</tr>
+					<tr>
+						<td th:text="'Tahun Masuk'"></td>
+						<td th:text="${tua.tahunMasuk}"></td>
+					</tr>
+					<tr>
+						<td th:text="'Nama Instansi'"></td>
+						<td th:text="${tua.instansi.nama}"></td>
+					</tr>
+					<tr th:each="jabatan, iterationStatus : ${tua.jabatanList}">
+						<td th:text=" ${iterationStatus.first} ? 'Jabatan'"></td>
+						<td>
+							<ul>
+								<li th:text="${jabatan.nama}"></li>
+							</ul>
+						</td>
+					</tr>
+				</tbody>
+			
+			</table>
+		</div>
 	</div>
 </body>
 
