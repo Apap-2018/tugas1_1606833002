@@ -70,6 +70,26 @@ public class PegawaiController {
 		return "add-pegawai";
 	}
 	
+	@RequestMapping(value = "/pegawai/ubah", method = RequestMethod.GET)
+	private String update (@RequestParam(value="nip") String nip, Model model) {
+		PegawaiModel pegawai = pegawaiService.getPegawaiDetailByNip(nip);
+		
+		model.addAttribute("pegawai", pegawai);
+		model.addAttribute("listProvinsi", provinsiService.getAll());
+		model.addAttribute("listSemuaJabatan", jabatanService.getAll());
+		model.addAttribute("listInstansi", instansiService.getAll());
+		return "update-pegawai";
+	}
+	
+	@RequestMapping(value = "/pegawai/ubah", method = RequestMethod.POST, params= {"submit"})
+	private String updatePegawaiSubmit (@ModelAttribute PegawaiModel pegawai, Model model) {
+		pegawaiService.createNIP(pegawai);
+		
+		pegawaiService.addPegawai(pegawai);
+		model.addAttribute("NIP", pegawai.getNip());
+		return "update";
+	}
+	
 	@RequestMapping(value = "/pegawai/tambah", method = RequestMethod.POST, params= {"addRowJabatan"})
 	private String addRowJabatan (@ModelAttribute PegawaiModel pegawai, BindingResult bindingResult , Model model) {
 		if(pegawai.getJabatanList() == null) {
@@ -81,6 +101,27 @@ public class PegawaiController {
 		model.addAttribute("listProvinsi", provinsiService.getAll());
 		model.addAttribute("listSemuaJabatan", jabatanService.getAll());
 		return "add-pegawai";
+	}
+	
+	@RequestMapping(value = "/pegawai/ubah", method = RequestMethod.POST, params= {"addRowJabatan"})
+	private String updateAddRowJabatan (@ModelAttribute PegawaiModel pegawai, BindingResult bindingResult , Model model) {
+		if(pegawai.getJabatanList() == null) {
+			pegawai.setJabatanList(new ArrayList<JabatanModel>());
+		}
+		
+		JabatanModel jabatan = new JabatanModel();
+		jabatan.setNama("pilih Jabatan");
+		jabatan.setDeskripsi("");
+		jabatan.setGajiPokok((double)0);
+		jabatan.setPegawaiList(new ArrayList<PegawaiModel>());
+		jabatan.setId(999999);
+		
+		
+		pegawai.getJabatanList().add(jabatan);
+		model.addAttribute("pegawai", pegawai);
+		model.addAttribute("listProvinsi", provinsiService.getAll());
+		model.addAttribute("listSemuaJabatan", jabatanService.getAll());
+		return "update-pegawai";
 	}
 	
 	@RequestMapping(value = "/pegawai/tambah/instansi",method = RequestMethod.GET)

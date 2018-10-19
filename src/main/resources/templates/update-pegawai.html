@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<title>Add Pegawai</title>
+	<title>Update Pegawai</title>
 	
 	<object th:include="fragments/fragment :: css" th:remove="tag"></object>
 	<object th:include="fragments/fragment :: js" th:remove="tag"></object>
@@ -16,8 +16,9 @@
 <body>
 	<nav th:replace="fragments/fragment :: navbar"></nav>
 	<div class="container-fluid">
-		<h2 th:text="'Tambah Pegawai'"></h2>
-		<form th:action="@{/pegawai/tambah}" th:object="${pegawai}" method="POST">
+		<h2 th:text="'Ubah Pegawai'"></h2>
+		<form th:action="@{/pegawai/ubah}" th:object="${pegawai}" method="POST">
+		<input type="hidden" th:field="*{id}"/>
 			<table class="table">
 				<tbody>
 				 	<tr>
@@ -48,7 +49,6 @@
 				 		<td th:text="'Provinsi'"></td>
 				 		<td>
 			 				<select id="provinsi" class="form-control"/>
-			 					<option disabled="disabled" selected="selected" >Pilih Provinsi</option>
 								<option th:each="provinsi : ${listProvinsi}"
 								th:value="${provinsi.id}"
 								th:text="${provinsi.nama}"></option>
@@ -60,7 +60,7 @@
 				 		<td th:text="'Nama Instansi'"></td>
 				 		<td>
 			 				<select th:field="*{instansi}" id="instansi" class="form-control"/>
-			 					<option disabled="disabled" selected="selected" >Pilih Instansi</option>
+			 					<option  th:value="*{instansi.id}" selected="selected" th:text="*{instansi.nama}"></option>
 			 				</select>
 				 		</td>
 				 	</tr>
@@ -69,7 +69,7 @@
 				 		<td th:text=" ${iterationStatus.first} ? 'Jabatan' : '' "></td>
 				 		<td>
 			 				<select th:field="*{jabatanList[__${iterationStatus.index}__]}" class="form-control"/>
-			 					<option>Pilih Jabatan</option>
+			 					<option th:value="${calonJabatan.id}" selected="selected" th:text="${calonJabatan.nama}" ></option>
 								<option th:each="jabatan : ${listSemuaJabatan}"
 								th:value="${jabatan.id}"
 								th:text="${jabatan.nama}"></option>
@@ -84,7 +84,7 @@
 				 	</tr>
 				</tbody>
 			</table>
-			<button type="submit" name="submit">Simpan</button>
+			<button type="submit" class="btn btn-primary" name="submit">Simpan</button>
 		</form>
 	</div>
 	
