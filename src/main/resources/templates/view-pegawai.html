@@ -38,11 +38,11 @@
 					</tr>
 					<tr>
 						<td th:text="'Nama Instansi'"></td>
-						<td th:text="${pegawai.instansi.nama}"></td>
+						<td th:text="${pegawai.instansi.nama} + ' - ' + ${pegawai.instansi.provinsi.nama}"></td>
 					</tr>
-					<tr>
-						<td th:text="'Jabatan'"></td>
-						<td th:each="jabatan : ${listJabatan}">
+					<tr th:each="jabatan, iterationStat : ${listJabatan}">
+						<td th:text="${iterationStat.first} ? 'Jabatan'"></td>
+						<td>
 							<ul>
 								<li th:text="${jabatan.nama}"></li>
 							</ul>

@@ -41,7 +41,10 @@ public class PegawaiServiceImpl implements PegawaiService{
 		
 		for(JabatanModel jabatan : pegawai.getJabatanList()) {
 			double gajiPokok = jabatan.getGajiPokok();
-			gaji += (gajiPokok + (gajiPokok * persentase / 100));
+			double gajiBaru = (gajiPokok + (gajiPokok * persentase / 100));
+			if (gaji < gajiBaru) {
+				gaji = gajiBaru;
+			}
 		}
 		
 		return (int)gaji;
