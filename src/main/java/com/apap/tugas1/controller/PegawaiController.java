@@ -140,15 +140,37 @@ public class PegawaiController {
 	
 	
 	@RequestMapping(value = "/pegawai/cari")
-	private String cari(@RequestParam(value = "idProvinsi", required=false) String idProvinsi,
-			@RequestParam(value="idInstansi",  required=false) String id_instansi,
-			@RequestParam(value="idJabatan", required=false) String id_jabatan,
+	private String cari(@RequestParam(value = "idProvinsi", required=false) Long idProvinsi,
+			@RequestParam(value="idInstansi",  required=false) Long id_instansi,
+			@RequestParam(value="idJabatan", required=false) Long id_jabatan,
 			Model model) {
-		
-		
 		model.addAttribute("listProvinsi", provinsiService.getAll());
 		model.addAttribute("listJabatan", jabatanService.getAll());
-		model.addAttribute("listInstansi", instansiService.getAll());
+		model.addAttribute("listSemuaInstansi", instansiService.getAll());
+		
+		List<PegawaiModel> listPegawaiAsli = null;
+		
+		if(id_jabatan != null) {
+			listPegawaiAsli = jabatanService.getJabatanDetailById(id_jabatan).getPegawaiList();
+		} else {
+			listPegawaiAsli = pegawaiService.getAllPegawai();
+		}
+		
+		
+		ProvinsiModel provinsi = null;
+		if (idProvinsi != null) {
+			provinsi = provinsiService.getProvinsiDetailbyId(idProvinsi);
+		}
+		
+		InstansiModel instansi = null;
+		if (id_instansi != null) {
+			instansi = instansiService.getInstansiDetailById(id_instansi);
+		}
+		
+		List<PegawaiModel> hasilFilter = null;
+		hasilFilter = pegawaiService.filterPegawai(provinsi, instansi, listPegawaiAsli);
+		
+		model.addAttribute("listPegawai", hasilFilter);
 		return "cari-pegawai";
 	}
 	

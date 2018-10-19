@@ -3,6 +3,7 @@ package com.apap.tugas1.service;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -20,6 +21,9 @@ import com.apap.tugas1.repository.PegawaiDB;
 public class PegawaiServiceImpl implements PegawaiService{
 	@Autowired
 	private PegawaiDB pegawaiDB;
+	
+	@Autowired
+	private InstansiService instansiService;
 	
 	@Override
 	public PegawaiModel getPegawaiDetailByNip(String nip) {
@@ -87,6 +91,62 @@ public class PegawaiServiceImpl implements PegawaiService{
 	@Override
 	public PegawaiModel getPegawaiMudaInstansi(InstansiModel instansi) {
 		return pegawaiDB.findFirstByInstansiOrderByTanggalLahirDesc(instansi);
+	}
+
+	/**
+	 * listAwal adalah list pegawai yang sudah difilter berdasarkan jabatannya
+	 */
+	@Override
+	public List<PegawaiModel> filterPegawai(ProvinsiModel provinsi, InstansiModel instansi, List<PegawaiModel> listAwal) {
+		List<PegawaiModel> hasilFilter = new ArrayList<PegawaiModel>();
+		
+		if (provinsi != null) {
+			
+			if (instansi != null) {
+				// filter by provinsi + instansi
+				// cukup dicari yang punya instansi yang sama
+				// karena instansi to provinsi = many to one
+				hasilFilter = filterByInstansi(instansi, listAwal);
+			}
+			else {
+				// filter by provinsi
+				List<InstansiModel> listInstansi = instansiService.getInstansiDetailByProvinsi(provinsi);
+				for (InstansiModel instansiProv : listInstansi) {
+					hasilFilter.addAll(filterByInstansi(instansiProv, listAwal));
+					
+				}
+				
+				
+			}
+			
+		} else {
+			
+			if (instansi != null) {
+				// filter by instansi
+				hasilFilter = filterByInstansi(instansi, listAwal);
+				
+			}
+			else {
+				// filter no param
+			}
+			
+		}
+		
+		return hasilFilter;
+	}
+	
+	private List<PegawaiModel> filterByInstansi (InstansiModel instansi, List<PegawaiModel> listPegawai){
+		List<PegawaiModel> hasilFilter = new ArrayList<PegawaiModel>();
+		for (PegawaiModel pegawai : listPegawai) {
+			if (pegawai.getInstansi().getId() == instansi.getId())
+				hasilFilter.add(pegawai);
+		}
+		return hasilFilter;
+	}
+
+	@Override
+	public List<PegawaiModel> getAllPegawai() {
+		return pegawaiDB.findAll();
 	}
 	
 	
