@@ -127,7 +127,7 @@ public class PegawaiServiceImpl implements PegawaiService{
 				
 			}
 			else {
-				// filter no param
+				hasilFilter = listAwal;
 			}
 			
 		}

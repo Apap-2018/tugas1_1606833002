@@ -2,6 +2,7 @@ package com.apap.tugas1.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -140,9 +141,9 @@ public class PegawaiController {
 	
 	
 	@RequestMapping(value = "/pegawai/cari")
-	private String cari(@RequestParam(value = "idProvinsi", required=false) Long idProvinsi,
-			@RequestParam(value="idInstansi",  required=false) Long id_instansi,
-			@RequestParam(value="idJabatan", required=false) Long id_jabatan,
+	private String cari(@RequestParam(value = "idProvinsi") Optional<Long> idProvinsi,
+			@RequestParam(value="idInstansi") Optional<Long> id_instansi,
+			@RequestParam(value="idJabatan") Optional<Long> id_jabatan,
 			Model model) {
 		model.addAttribute("listProvinsi", provinsiService.getAll());
 		model.addAttribute("listJabatan", jabatanService.getAll());
@@ -150,21 +151,23 @@ public class PegawaiController {
 		
 		List<PegawaiModel> listPegawaiAsli = null;
 		
-		if(id_jabatan != null) {
-			listPegawaiAsli = jabatanService.getJabatanDetailById(id_jabatan).getPegawaiList();
+		if(id_jabatan.isPresent()) {
+			System.out.println(id_jabatan);
+			JabatanModel jabatan = jabatanService.getJabatanDetailById(id_jabatan.get());
+			listPegawaiAsli = jabatan.getPegawaiList();
 		} else {
 			listPegawaiAsli = pegawaiService.getAllPegawai();
 		}
 		
 		
 		ProvinsiModel provinsi = null;
-		if (idProvinsi != null) {
-			provinsi = provinsiService.getProvinsiDetailbyId(idProvinsi);
+		if (idProvinsi.isPresent()) {
+			provinsi = provinsiService.getProvinsiDetailbyId(idProvinsi.get());
 		}
 		
 		InstansiModel instansi = null;
-		if (id_instansi != null) {
-			instansi = instansiService.getInstansiDetailById(id_instansi);
+		if (id_instansi.isPresent()) {
+			instansi = instansiService.getInstansiDetailById(id_instansi.get());
 		}
 		
 		List<PegawaiModel> hasilFilter = null;
