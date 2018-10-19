@@ -37,7 +37,7 @@ public class PegawaiServiceImpl implements PegawaiService{
 		
 		InstansiModel instansi = pegawai.getInstansi();
 		ProvinsiModel provinsi = instansi.getProvinsi();
-		double persentase = provinsi.getPresentasiTunjangan();
+		double persentase = provinsi.getPresentaseTunjangan();
 		
 		for(JabatanModel jabatan : pegawai.getJabatanList()) {
 			double gajiPokok = jabatan.getGajiPokok();

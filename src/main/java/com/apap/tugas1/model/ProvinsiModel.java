@@ -15,9 +15,8 @@ import javax.validation.constraints.Size;
 @Table(name = "provinsi")
 public class ProvinsiModel implements Serializable{
 	@Id
-	@Size(max=10)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private long id;
 	
 	@NotNull
 	@Size(max=255)
@@ -25,14 +24,14 @@ public class ProvinsiModel implements Serializable{
 	private String nama;
 	
 	@NotNull
-	@Column(name="presentasi_tunjangan", nullable=false)
-	private Double presentasiTunjangan;
+	@Column(name="presentase_tunjangan", nullable=false)
+	private Double presentaseTunjangan;
 	
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -44,12 +43,12 @@ public class ProvinsiModel implements Serializable{
 		this.nama = nama;
 	}
 
-	public Double getPresentasiTunjangan() {
-		return presentasiTunjangan;
+	public Double getPresentaseTunjangan() {
+		return presentaseTunjangan;
 	}
 
 	public void setPresentasiTunjangan(Double presentasiTunjangan) {
-		this.presentasiTunjangan = presentasiTunjangan;
+		this.presentaseTunjangan = presentasiTunjangan;
 	}
 
 }

@@ -20,4 +20,9 @@ public class ProvinsiServiceImpl implements ProvinsiService{
 	public List<ProvinsiModel> getAll(){
 		return provinsiDB.findAll();
 	}
+
+	@Override
+	public ProvinsiModel getProvinsiDetailbyId(Long id) {
+		return provinsiDB.getOne(id);
+	}
 }

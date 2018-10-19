@@ -1,6 +1,7 @@
 package com.apap.tugas1.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,10 +11,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.apap.tugas1.model.InstansiModel;
 import com.apap.tugas1.model.JabatanModel;
 import com.apap.tugas1.model.PegawaiModel;
+import com.apap.tugas1.model.ProvinsiModel;
 import com.apap.tugas1.service.InstansiService;
 import com.apap.tugas1.service.JabatanService;
 import com.apap.tugas1.service.PegawaiService;
@@ -57,7 +60,6 @@ public class PegawaiController {
 		JabatanModel jabatan = new JabatanModel();
 		PegawaiModel pegawai = new PegawaiModel();
 		ArrayList<JabatanModel> listJabatan = new ArrayList<JabatanModel>();
-		
 		listJabatan.add(jabatan);
 		pegawai.setJabatanList(listJabatan);
 		
@@ -81,10 +83,17 @@ public class PegawaiController {
 		return "add-pegawai";
 	}
 	
+	@RequestMapping(value = "/pegawai/tambah/instansi",method = RequestMethod.GET)
+	private @ResponseBody List<InstansiModel> cekInstansi(@RequestParam(value="provinsiId") Long provinsiId) {
+		ProvinsiModel provinsi = provinsiService.getProvinsiDetailbyId(provinsiId);
+		return instansiService.getInstansiDetailByProvinsi(provinsi);
+	}
+	
 	@RequestMapping(value = "/pegawai/tambah", method = RequestMethod.POST, params= {"submit"})
 	private String addPegawaiSubmit (@ModelAttribute PegawaiModel pegawai, Model model) {
 		pegawaiService.createNIP(pegawai);
 		pegawaiService.addPegawai(pegawai);
+		model.addAttribute("NIP", pegawai.getNip());
 		return "add";
 	}
 	
