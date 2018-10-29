@@ -21,7 +21,7 @@
 		<h3>Lihat Data Pegawai berdasarkan NIP</h3>
 		<form th:action="@{/pegawai}" method="GET">
 			<label for="pilotLicenseNumber">Masukkan Nomor Induk Pegawai</label>
-			<input type="text" name="nip" class="form-control"/>
+			<input required="required" type="text" name="nip" class="form-control"/>
 			<br>
 			<button type="submit" class="btn btn-primary">Lihat</button>
 		</form>
@@ -31,8 +31,8 @@
 		<h3>Lihat Detail Jabatan</h3>
 		<form th:action="@{/jabatan/view}" method="GET">
 			<label for="pilotLicenseNumber">Pilih Jabatan</label>
-		 	<select name="idJabatan" class="form-control"/>
-		 		<option disabled="disabled" selected="selected" >Pilih Jabatan</option>
+		 	<select required="required" name="idJabatan" class="form-control"/>
+		 		<option hidden="" disabled="disabled" selected="selected" >Pilih Jabatan</option>
 				<option th:each="jabatan : ${listSemuaJabatan}"
 				th:value="${jabatan.id}"
 				th:text="${jabatan.nama}"></option>
@@ -47,7 +47,7 @@
 		<form th:action="@{/pegawai/termuda-tertua}" method="GET">
 			<label for="pilotLicenseNumber">Pilih Instansi</label>
 		 	<select name="idInstansi" class="form-control"/>
-		 		<option disabled="disabled" selected="selected" >Pilih Instansi</option>
+		 		<option hidden="" disabled="disabled" selected="selected" >Pilih Instansi</option>
 				<option th:each="instansi : ${listInstansi}"
 				th:value="${instansi.id}"
 				th:text="${instansi.nama}"></option>

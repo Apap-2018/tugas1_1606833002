@@ -23,31 +23,31 @@
 				 	<tr>
 				 		<td th:text="'Nama'"></td>
 				 		<td>
-			 				<input type="text" th:field="*{nama}" class="form-control"/>
+			 				<input required="required" type="text" th:field="*{nama}" class="form-control"/>
 				 		</td>
 				 	</tr>
 				 	<tr>
 				 		<td th:text="'Tempat Lahir'"></td>
 				 		<td>
-			 				<input type="text" th:field="*{tempatLahir}" class="form-control"/>
+			 				<input required="required" type="text" th:field="*{tempatLahir}" class="form-control"/>
 				 		</td>
 				 	</tr>
 				 	<tr>
 				 		<td th:text="'Tanggal Lahir'"></td>
 				 		<td>
-			 				<input type="date" th:field="*{tanggalLahir}" class="form-control"/>
+			 				<input required="required" type="date" th:field="*{tanggalLahir}" class="form-control"/>
 				 		</td>
 				 	</tr>
 				 	<tr>
 				 		<td th:text="'Tahun Masuk'"></td>
 				 		<td>
-			 				<input type="number" th:field="*{tahunMasuk}" class="form-control"/>
+			 				<input required="required" type="number" th:field="*{tahunMasuk}" class="form-control"/>
 				 		</td>
 				 	</tr>
 				 	<tr>
 				 		<td th:text="'Provinsi'"></td>
 				 		<td>
-			 				<select id="provinsi" class="form-control"/>
+			 				<select required="required" id="provinsi" class="form-control"/>
 			 					<option disabled="disabled" selected="selected" >Pilih Provinsi</option>
 								<option th:each="provinsi : ${listProvinsi}"
 								th:value="${provinsi.id}"
@@ -59,7 +59,7 @@
 				 	<tr>
 				 		<td th:text="'Nama Instansi'"></td>
 				 		<td>
-			 				<select th:field="*{instansi}" id="instansi" class="form-control"/>
+			 				<select required="required" th:field="*{instansi}" id="instansi" class="form-control"/>
 			 					<option disabled="disabled" selected="selected" >Pilih Instansi</option>
 			 				</select>
 				 		</td>
@@ -68,7 +68,7 @@
 				 	<tr th:each="calonJabatan, iterationStatus : *{jabatanList}">
 				 		<td th:text=" ${iterationStatus.first} ? 'Jabatan' : '' "></td>
 				 		<td>
-			 				<select th:field="*{jabatanList[__${iterationStatus.index}__]}" class="form-control"/>
+			 				<select required="required" th:field="*{jabatanList[__${iterationStatus.index}__]}" class="form-control"/>
 			 					<option>Pilih Jabatan</option>
 								<option th:each="jabatan : ${listSemuaJabatan}"
 								th:value="${jabatan.id}"

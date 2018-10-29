@@ -156,7 +156,12 @@ public class PegawaiController {
 			JabatanModel jabatan = jabatanService.getJabatanDetailById(id_jabatan.get());
 			listPegawaiAsli = jabatan.getPegawaiList();
 		} else {
-			listPegawaiAsli = pegawaiService.getAllPegawai();
+			if(!idProvinsi.isPresent() && !id_instansi.isPresent()) {
+				listPegawaiAsli = new ArrayList<>();
+			}
+			else {	
+				listPegawaiAsli = pegawaiService.getAllPegawai();
+			}
 		}
 		
 		

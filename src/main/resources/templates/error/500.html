@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>500 Internal Server Error</title>
+	<object th:include="fragments/fragment :: css" th:remove="tag"></object>
+	<object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+	<nav th:replace="fragments/fragment :: navbar"></nav>
+	<div class="col-md-8">
+		<h2>Aplikasi / Server error</h2>
+		<hr>
+		<p>Action yang terakhir Kamu lakukan terpaksa gagal</p>
+		<p>Ada beberapa kemungkinan yang menjadi penyebabnya:</p>
+		<ul>
+			<li>Data yang Kamu tuliskan sudah terdaftar sebelumnya</li>
+			<li>Data yang Kamu buat terlalu panjang</li>
+		</ul>
+		<hr>
+		<p>Silahkan kembali ke halaman utama kami</p>
+		<a class="btn btn-primary" href="/">Home</a>
+	</div>
+</body>
+
+
+</html>
