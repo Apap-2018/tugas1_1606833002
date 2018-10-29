@@ -16,6 +16,9 @@
 		<div th:if="${NIP}">
 			<p th:text="'Pegawai dengan NIP ' + ${NIP} + ' berhasil ditambahkan'">
 		</div>
+		<div th:if="${jabatan}">
+			<p th:text="'Jabatan dengan nama ' + ${jabatan.nama} + ' berhasil ditambahkan'">
+		</div>
 		
 	</div>
 	

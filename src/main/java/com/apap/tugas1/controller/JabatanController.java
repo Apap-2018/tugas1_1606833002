@@ -23,8 +23,9 @@ public class JabatanController {
 	}
 	
 	@RequestMapping(value = "/jabatan/tambah", method = RequestMethod.POST)
-	private String addJabatanSubmit(@ModelAttribute JabatanModel jabatan) {
+	private String addJabatanSubmit(@ModelAttribute JabatanModel jabatan, Model model) {
 		jabatanService.addJabatan(jabatan);
+		model.addAttribute("jabatan", jabatan);
 		return "add";
 	}
 	
@@ -44,6 +45,7 @@ public class JabatanController {
 	@RequestMapping(value = "/jabatan/ubah/", method = RequestMethod.POST)
 	private String ubahSubmit(@ModelAttribute JabatanModel jabatan, Model model) {
 		jabatanService.addJabatan(jabatan);
+		model.addAttribute("jabatan", jabatan);
 		return "update";
 	}
 
